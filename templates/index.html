@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reloj Digital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="clock" id="clock"></div>
+    <p>Visitas registradas: {{ visits }}</p>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+name: Deploy to Digital Ocean App Platform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install doctl
+        run: |
+          curl -sL https://github.com/digitalocean/doctl/releases/latest/download/doctl-linux-amd64.tar.gz | tar -xz
+          sudo mv doctl /usr/local/bin
+
+      - name: Authenticate doctl
+        run: doctl auth init -t ${{ secrets.DO_API_TOKEN }}
+
+      - name: Deploy app
+        run: |
+          # Si no tienes app creada, la creas con:
+          # doctl apps create --spec app.yaml
+
+          # Si ya tienes app creada, la actualizas con:
+          doctl apps update <APP_ID> --spec app.yaml
+
+          # Para obtener el APP_ID, puedes guardarlo en un secret y poner aquí

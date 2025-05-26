@@ -4,7 +4,7 @@ services:
     github:
       repo: Johnale22/RelojDigital
       branch: main
-    run_command: gunicorn app:app
+    run_command: gunicorn app:app --bind 0.0.0.0:$PORT
     instance_count: 1
     instance_size_slug: basic-xxs
     envs:

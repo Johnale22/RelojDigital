@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import os
 
 app = Flask(__name__)
 
@@ -11,10 +12,11 @@ def home():
     return render_template('index.html', visits=count)
 
 if __name__ == '__main__':
-    # Inicializa el contador solo si el archivo está vacío
+    # Inicializa counter.txt si está vacío
     with open("counter.txt", "a+") as f:
         f.seek(0)
         if not f.read():
             f.write("0")
-    # Ejecuta el servidor Flask solo en modo desarrollo
-    app.run(debug=True)
+    # Usa el puerto asignado por Digital Ocean o 5000 para desarrollo local
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)

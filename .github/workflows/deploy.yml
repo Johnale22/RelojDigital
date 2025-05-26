@@ -1,4 +1,4 @@
-name: Deploy to Digital Ocean App Platform
+name: Deploy Flask app to Digital Ocean App Platform
 
 on:
   push:
@@ -23,10 +23,4 @@ jobs:
 
       - name: Deploy app
         run: |
-          # Si no tienes app creada, la creas con:
-          # doctl apps create --spec app.yaml
-
-          # Si ya tienes app creada, la actualizas con:
-          doctl apps update <APP_ID> --spec app.yaml
-
-          # Para obtener el APP_ID, puedes guardarlo en un secret y poner aquí
+          doctl apps update ${{ secrets.DO_APP_ID }} --spec app.yaml

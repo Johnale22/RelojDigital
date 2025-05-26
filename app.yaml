@@ -1,0 +1,12 @@
+name: reloj-digital-flask
+services:
+  - name: web
+    github:
+      repo: Johnale22/RelojDigital
+      branch: main
+    run_command: gunicorn app:app
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: FLASK_ENV
+        value: production
